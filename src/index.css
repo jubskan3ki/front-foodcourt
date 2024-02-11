@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --font-h1: 40px;
+    --font-h2: 36px;
+    --font-h3: 32px;
+    --font-h4: 28px;
+    --font-p: 20px;
+    --font-a: 20px;
+    --font-li: 20px;
+    --font-input: 20px;
+    --font-submit: 20px;
+    --font-checkbox: 20px;
+    --font-label: 20px;
+    --font-placeholder: 20px;
+    --font-button: 20px;
+    --font-i: 36px;
+    --font-u: 20px;
+    --font-td: 20px;
+    --font-th: 24px;
+    --font-textarea-placeholder: 20px;
+    --font-textarea: 20px;
+    --font-select: 20px;
+    --font-small: 16px;
+
+    --color-black: rgba(31, 31, 31, 1);
+    --color-black-25: rgba(31, 31, 31, 0.25);
+    --color-black-50: rgba(31, 31, 31, 0.5);
+    --color-black-75: rgba(31, 31, 31, 0.75);
+    --color-white: rgba(235, 235, 235, 1);
+    --color-white-25: rgba(235, 235, 235, 0.25);
+    --color-white-50: rgba(235, 235, 235, 0.5);
+    --color-white-75: rgba(235, 235, 235, 0.75);
+    --color-gray: rgba(71, 71, 71, 1);
+    --color-violet: rgba(114, 41, 122, 1);
+    --color-violet-25: rgba(114, 41, 122, 0.25);
+    --color-violet-50: rgba(114, 41, 122, 0.5);
+    --color-violet-75: rgba(114, 41, 122, 0.75);
+    --color-violet-light: rgba(155, 114, 170, 1);
+    --color-violet-dark: rgba(86, 28, 89, 1);
+    --color-turquoise: rgba(65, 133, 150, 1);
+    --color-turquoise-25: rgba(65, 133, 150, 0.25);
+    --color-turquoise-50: rgba(65, 133, 150, 0.5);
+    --color-turquoise-75: rgba(65, 133, 150, 0.75);
+    --color-turquoise-light: rgba(107, 172, 191, 1);
+    --color-turquoise-dark: rgba(48, 104, 114, 1);
+    --color-warning: rgba(255, 231, 71, 1);
+    --color-success: rgba(76, 175, 80, 1);
+    --color-error: rgba(184, 0, 0, 1);
+    --color-info: rgba(107, 172, 191, 1);
+
+    --spacing-xs: 4px;
+    --spacing-s: 8px;
+    --spacing-m: 16px;
+    --spacing-l: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 40px;
+}
+
+@media (max-width: 1440px) {
+    :root {
+        --font-h1: 38px;
+        --font-h2: 34px;
+        --font-h3: 30px;
+        --font-h4: 26px;
+        --font-p: 18px;
+        --font-a: 18px;
+        --font-li: 18px;
+        --font-input: 18px;
+        --font-submit: 18px;
+        --font-checkbox: 18px;
+        --font-label: 18px;
+        --font-placeholder: 18px;
+        --font-button: 18px;
+        --font-i: 34px;
+        --font-u: 18px;
+        --font-td: 18px;
+        --font-th: 22px;
+        --font-textarea-placeholder: 18px;
+        --font-textarea: 18px;
+        --font-select: 18px;
+        --font-small: 16px;
+    }
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --font-h1: 36px;
+        --font-h2: 32px;
+        --font-h3: 28px;
+        --font-h4: 24px;
+        --font-p: 16px;
+        --font-a: 16px;
+        --font-li: 16px;
+        --font-input: 16px;
+        --font-submit: 16px;
+        --font-checkbox: 16px;
+        --font-label: 16px;
+        --font-placeholder: 16px;
+        --font-button: 16px;
+        --font-i: 32px;
+        --font-u: 16px;
+        --font-td: 16px;
+        --font-th: 20px;
+        --font-textarea-placeholder: 16px;
+        --font-textarea: 16px;
+        --font-select: 16px;
+        --font-small: 14px;
+    }
+}
+
+@media (max-width: 720px) {
+    :root {
+        --font-h1: 34px;
+        --font-h2: 30px;
+        --font-h3: 26px;
+        --font-h4: 22px;
+        --font-p: 14px;
+        --font-a: 14px;
+        --font-li: 14px;
+        --font-input: 14px;
+        --font-submit: 14px;
+        --font-checkbox: 14px;
+        --font-label: 14px;
+        --font-placeholder: 14px;
+        --font-button: 14px;
+        --font-i: 30px;
+        --font-u: 14px;
+        --font-td: 14px;
+        --font-th: 18px;
+        --font-textarea-placeholder: 14px;
+        --font-textarea: 14px;
+        --font-select: 14px;
+        --font-small: 12px;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: var(--color-black);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray);
+    border-radius: 10px;
+}
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    background: var(--color-violet-25);
+    color: #ebebeb;
+    font-family: 'lato', sans-serif;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: var(--font-h1);
+}
+
+h2 {
+    font-size: var(--font-h2);
+}
+
+h3 {
+    font-size: var(--font-h3);
+}
+
+h4 {
+    font-size: var(--font-h4);
+}
+
+p {
+    font-size: var(--font-p);
+}
+
+a {
+    font-size: var(--font-a);
+    color: white;
+    text-decoration: none;
+}
+
+li {
+    font-size: var(--font-li);
+}
+
+input {
+    font-size: var(--font-input);
+    border: none;
+    background: none;
+    color: white;
+}
+
+input::focus {
+    background-color: none;
+    border: none;
+}
+
+input[type='submit'] {
+    font-size: var(--font-submit);
+}
+
+input[type='checkbox'] {
+    font-size: var(--font-checkbox);
+}
+
+label {
+    font-size: var(--font-label);
+}
+
+input::placeholder {
+    font-size: var(--font-placeholder);
+    cursor: pointer;
+}
+
+button {
+    font-size: var(--font-button);
+    border: none;
+    background: none;
+}
+
+i {
+    font-size: var(--font-i);
+}
+
+u {
+    font-size: var(--font-u);
+}
+
+td {
+    font-size: var(--font-td);
+}
+
+th {
+    font-size: var(--font-th);
+}
+
+textarea::placeholder {
+    font-size: var(--font-textarea-placeholder);
+}
+
+textarea {
+    font-size: var(--font-textarea);
+}
+
+select {
+    font-size: var(--font-select);
+}
+
+small {
+    font-size: var(--font-small);
+}

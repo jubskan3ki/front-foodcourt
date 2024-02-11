@@ -1,0 +1,37 @@
+.Background img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50vw;
+    z-index: -1;
+}
+
+.Background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50vw;
+    z-index: -1;
+}
+
+#root {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 30px;
+    height: 100vh;
+    padding: 5vh 5vw;
+}
+
+@media screen and (max-width: 720px) {
+    #root {
+        display: flex;
+        grid-template-columns: none;
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 0;
+        gap: 0;
+    }
+}

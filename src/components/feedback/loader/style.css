@@ -1,0 +1,32 @@
+.loader-container {
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(10px) brightness(75%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+.loader {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border: 8px solid var(--color-violet-25);
+    border-top: 8px solid var(--color-turquoise);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
