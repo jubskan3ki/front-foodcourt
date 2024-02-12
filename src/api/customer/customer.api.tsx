@@ -31,10 +31,10 @@ class ApiCustomer {
         return api(apiProps);
     }
 
-    static async getAllOrder(): Promise<ApiReturn> {
+    static async getAllOrder(userId: any): Promise<ApiReturn> {
         const token = Cookies.get('authToken');
         const apiProps: ApiProps = {
-            url: 'http://127.0.0.1:8095/api/customer/commande/all',
+            url: `http://127.0.0.1:8095/api/customer/commande/${userId}`,
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

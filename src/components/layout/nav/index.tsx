@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { MdExitToApp } from 'react-icons/md';
 import { AppBar, Toolbar, Button } from '@mui/material';
@@ -10,47 +10,49 @@ import {
     userNavItems,
 } from '../../../data/nav.data';
 
-function Navbar(userRole: any) {
+function Navbar({ user }: { user: any }) {
     const { isLoggedIn } = useContext(AuthContext);
+    const logout = useLogout();
     let navItems: any[] = [];
 
-    switch (userRole) {
+    // Determine which set of navigation items to use based on the user role
+    switch (user?.roles) {
         case 3:
             navItems = adminNavItems;
-            console.log(userRole);
             break;
         case 2:
             navItems = sellerNavItems;
-            console.log(userRole);
             break;
         case 1:
             navItems = userNavItems;
-            console.log(userRole);
             break;
         default:
-            navItems = [];
+            navItems = []; // or some default nav items
+            break;
     }
 
     return (
         <AppBar position="static">
             <Toolbar>
-                {navItems.map((item) => (
-                    <Button
-                        color="inherit"
-                        key={item.name}
-                        component={Link}
-                        to={item.path}
-                    >
-                        {item.icon}
-                        {item.name}
-                    </Button>
-                ))}
+                {navItems
+                    .filter((item) => item.show)
+                    .map((item) => (
+                        <Button
+                            color="inherit"
+                            key={item.name}
+                            component={Link}
+                            to={item.path}
+                        >
+                            {React.createElement(item.icon)}
+                            {item.name}
+                        </Button>
+                    ))}
                 {isLoggedIn && (
                     <Button
                         color="inherit"
-                        onClick={useLogout}
-                        component={Link}
-                        to="/logout"
+                        onClick={() => {
+                            logout();
+                        }}
                     >
                         <MdExitToApp />
                         Logout

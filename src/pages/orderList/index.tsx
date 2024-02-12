@@ -37,11 +37,17 @@ function OrderList() {
             let response;
             if (isSeller) {
                 response = await ApiSeller.getAllOrder(4);
+            } else if (user) {
+                console.log(user.id);
+                response = await ApiCustomer.getAllOrder(user.id);
+                console.log(response);
             } else {
-                response = await ApiCustomer.getAllOrder();
+                console.error('User data is null');
+                setLoading(false);
+                return;
             }
-            if (response.success && response.data) {
-                dispatch(setOrder(response.data));
+            if (response && response.data) {
+                dispatch(setOrder(response.data.data));
             } else {
                 console.error('Failed to fetch orders', response.error);
             }

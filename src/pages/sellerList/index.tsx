@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
     Table,
     TableBody,
@@ -18,9 +19,7 @@ function SellerList() {
     useEffect(() => {
         const fetchSellers = async () => {
             const response = await ApiCustomer.getAllSeller();
-            console.log('response', response.data);
             if (response && response.data) {
-                // Assurez-vous que la structure de response.data.data correspond à ce que vous attendez
                 dispatch(setSeller(response.data.data));
             } else {
                 console.error('Failed to fetch sellers', response.error);
@@ -39,6 +38,7 @@ function SellerList() {
                         <TableCell>Name</TableCell>
                         <TableCell>Email</TableCell>
                         <TableCell>Description</TableCell>
+                        <TableCell>Menu</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -49,11 +49,19 @@ function SellerList() {
                                 <TableCell>{seller.name}</TableCell>
                                 <TableCell>{seller.email}</TableCell>
                                 <TableCell>{seller.description}</TableCell>
+                                <TableCell>
+                                    <Link
+                                        to={`/menu/${seller.id}`}
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        View Menu
+                                    </Link>
+                                </TableCell>
                             </TableRow>
                         ))
                     ) : (
                         <TableRow>
-                            <TableCell colSpan={4} align="center">
+                            <TableCell colSpan={5} align="center">
                                 No sellers to display
                             </TableCell>
                         </TableRow>

@@ -52,7 +52,7 @@ class ApiAuth {
 
     static async createSeller(userData: any): Promise<ApiReturn> {
         const apiProps: ApiProps = {
-            url: 'http://127.0.0.1:8095/api/customer/restaurant/create',
+            url: 'http://127.0.0.1:8095/api/auth/restaurant/create',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,14 +61,6 @@ class ApiAuth {
         };
 
         const { data, error, isLoading } = await api(apiProps);
-
-        if (data && data.token) {
-            Cookies.set('authToken', data.token, {
-                expires: 0.5,
-                secure: true,
-                sameSite: 'Strict',
-            });
-        }
 
         return { data, error, isLoading, success: false, message: '' };
     }

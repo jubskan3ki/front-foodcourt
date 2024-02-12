@@ -61,8 +61,6 @@ function AppContent() {
 
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.value);
-    const userRole = user?.roles;
-    console.log(userRole);
 
     useEffect(() => {
         if (!isLoggedIn) return;
@@ -71,7 +69,6 @@ function AppContent() {
                 try {
                     const userResult = await ApiUser.getCurrentUsers();
                     if (userResult) {
-                        console.log('userResult', userResult.data);
                         dispatch(setUser(userResult.data));
                     }
                 } catch (error) {
@@ -88,7 +85,6 @@ function AppContent() {
 
     function renderRoutes() {
         if (!isLoggedIn) return <PublicRoutes />;
-        console.log('user?.roles', user?.roles);
         switch (user?.roles) {
             case 0: // Assurez-vous que le numéro correspond au rôle attendu pour un utilisateur
                 return <UserRoutes />;
@@ -105,7 +101,7 @@ function AppContent() {
 
     return (
         <>
-            <Navbar userRole={userRole} />
+            {isLoggedIn && <Navbar user={user} />}
             {renderRoutes()}
         </>
     );
