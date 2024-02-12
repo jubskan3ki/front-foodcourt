@@ -43,13 +43,14 @@ function Auth() {
             setIsLoading(true);
             try {
                 const response = await apiMethod(data);
-                if (!response.success) {
+                if (!response) {
                     throw new Error(
-                        response.message ||
-                            "Une erreur est survenue lors de l'authentification."
+                        "Une erreur est survenue lors de l'authentification."
                     );
                 }
+                window.location.reload();
             } catch (error) {
+                console.error("Erreur lors de l'authentification", error);
                 handleAuthError(
                     error instanceof Error ? error : "Erreur d'authentification"
                 );
@@ -80,8 +81,6 @@ function Auth() {
                 authData,
                 isLogin ? ApiAuth.login : ApiAuth.register
             );
-
-            window.location.reload();
         },
         [isLogin, formData, authenticate, handleAuthError]
     );

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useState, useEffect } from 'react';
 import {
     Button,
@@ -35,6 +36,12 @@ function AdminDashboard() {
 
     const initialLoaded = useSelector(
         (state: RootState) => state.initial.value
+    );
+
+    const sellers = useSelector((state: RootState) =>
+        isDraft
+            ? (state.draft.value as Seller[])
+            : (state.seller.value as Seller[])
     );
 
     useEffect(() => {
@@ -86,11 +93,14 @@ function AdminDashboard() {
         }
     };
 
-    const sellers = useSelector((state: RootState) =>
-        isDraft
-            ? (state.draft.value as Seller[])
-            : (state.seller.value as Seller[])
-    );
+    const handleOpen = async (sellerId: number) => {
+        const response = await ApiAdmin.openSeller(sellerId);
+        if (response.success) {
+            console.log('Vendeur approuvé');
+        } else {
+            console.error("Erreur lors de l'approbation du vendeur");
+        }
+    };
 
     return (
         <div>
@@ -118,8 +128,23 @@ function AdminDashboard() {
                                 <TableCell>{seller.name}</TableCell>
                                 <TableCell>{seller.email}</TableCell>
                                 <TableCell>
-                                    {seller.open ? 'Ouvert' : 'Fermé'}
+                                    {isDraft ? (
+                                        seller.open ? (
+                                            'Ouvert'
+                                        ) : (
+                                            'Fermé'
+                                        )
+                                    ) : (
+                                        <Button
+                                            onClick={() =>
+                                                handleOpen(seller.id)
+                                            }
+                                        >
+                                            {seller.open ? 'Fermer' : 'Ouvrir'}
+                                        </Button>
+                                    )}
                                 </TableCell>
+
                                 <TableCell>
                                     {isDraft ? (
                                         <Button

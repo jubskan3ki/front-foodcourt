@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthProvider, AuthContext } from './context/auth.context';
+import Navbar from './components/layout/nav';
 import AuthPage from './pages/auth';
 import AdminDashboard from './pages/adminDashboard';
 import SellerDashboard from './pages/sellerDashboard';
@@ -26,9 +27,9 @@ function UserRoutes() {
     return (
         <Routes>
             <Route path="/" element={<OrderList />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/menu/:id" element={<Menu />} />
             <Route path="/sellers" element={<SellerList />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<Error />} />
         </Routes>
     );
@@ -47,8 +48,8 @@ function AdminRoutes() {
 function SellerRoutes() {
     return (
         <Routes>
-            <Route path="/" element={<SellerDashboard />} />
-            <Route path="/orders" element={<OrderList />} />
+            <Route path="/" element={<OrderList />} />
+            <Route path="/dashboard" element={<SellerDashboard />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="*" element={<Error />} />
         </Routes>
@@ -60,9 +61,12 @@ function AppContent() {
 
     const dispatch = useDispatch();
     const user = useSelector((state: RootState) => state.user.value);
+    const userRole = user?.roles;
+    console.log(userRole);
 
     useEffect(() => {
-        if (!user?.roles) {
+        if (!isLoggedIn) return;
+        if (user?.roles === undefined || user?.roles === null) {
             const fetchData = async () => {
                 try {
                     const userResult = await ApiUser.getCurrentUsers();
@@ -80,12 +84,14 @@ function AppContent() {
 
             fetchData();
         }
-    }, [dispatch, user]);
+    }, [dispatch, user, isLoggedIn]);
 
     function renderRoutes() {
         if (!isLoggedIn) return <PublicRoutes />;
         console.log('user?.roles', user?.roles);
         switch (user?.roles) {
+            case 0: // Assurez-vous que le numéro correspond au rôle attendu pour un utilisateur
+                return <UserRoutes />;
             case 1: // Assurez-vous que le numéro correspond au rôle attendu pour un utilisateur
                 return <UserRoutes />;
             case 2: // Assurez-vous que le numéro correspond au rôle attendu pour un vendeur
@@ -97,7 +103,12 @@ function AppContent() {
         }
     }
 
-    return <>{renderRoutes()}</>;
+    return (
+        <>
+            <Navbar userRole={userRole} />
+            {renderRoutes()}
+        </>
+    );
 }
 
 function App() {

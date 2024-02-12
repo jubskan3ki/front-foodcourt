@@ -5,7 +5,7 @@ interface FormData {
     username: string;
     email: string;
     id?: number;
-    roles?: number;
+    roles?: number | null;
 }
 
 interface UserState {
@@ -16,7 +16,7 @@ const initialState: UserState = {
     value: {
         username: '',
         email: '',
-        Roles: '',
+        roles: null,
         id: 0,
     } as FormData,
 };

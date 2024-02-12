@@ -1,7 +1,7 @@
-// order.slice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Order {
+    id: number;
     date: string;
     content: string;
     userId?: number;
@@ -11,28 +11,21 @@ interface Order {
 }
 
 interface OrderState {
-    value: Order | null;
+    value: Order[];
 }
 
 const initialState: OrderState = {
-    value: {
-        date: '',
-        content: '',
-        userId: 0,
-        restaurantId: 0,
-        commentaire: '',
-        state: '',
-    } as Order,
+    value: [],
 };
 
 const orderSlice = createSlice({
     name: 'order',
     initialState,
     reducers: {
-        setOrder: (state, action: PayloadAction<Order>) => ({
-            ...state,
-            value: action.payload,
-        }),
+        setOrder: (state, action: PayloadAction<Order[]>) => {
+            // eslint-disable-next-line no-param-reassign
+            state.value = action.payload;
+        },
     },
 });
 

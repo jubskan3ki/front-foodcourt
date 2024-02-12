@@ -1,11 +1,18 @@
-import { MdHome, MdChat, MdPeople, MdPerson } from 'react-icons/md';
-import { NavItem } from '../interface/components/layout/navIcon.interface';
+import { MdDashboard, MdList, MdSettings, MdStore } from 'react-icons/md';
 
-const navItems: NavItem[] = [
-    { path: '/', icon: MdHome, name: 'Home' },
-    { path: '/Channel', icon: MdChat, name: 'Channel' },
-    { path: '/Friend', icon: MdPeople, name: 'Friend' },
-    { path: '/User', icon: MdPerson, name: 'User' },
+export const adminNavItems = [
+    { path: '/', name: 'Dashboard', icon: MdDashboard },
+    { path: '/settings', name: 'Settings', icon: MdSettings },
 ];
 
-export default navItems;
+export const sellerNavItems = [
+    { path: '/', name: 'Orders', icon: MdList },
+    { path: '/dashboard', name: 'Dashboard', icon: MdDashboard },
+    { path: '/settings', name: 'Settings', icon: MdSettings },
+];
+
+export const userNavItems = [
+    { path: '/', name: 'Order List', icon: MdList },
+    { path: '/sellers', name: 'Sellers', icon: MdStore },
+    { path: '/settings', name: 'Settings', icon: MdSettings },
+];

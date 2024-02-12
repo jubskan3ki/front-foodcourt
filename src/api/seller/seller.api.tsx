@@ -61,11 +61,25 @@ class ApiSeller {
         return api(apiProps);
     }
 
-    static async getOrder(sellertId: any): Promise<ApiReturn> {
+    static async getAllOrder(sellertId: any): Promise<ApiReturn> {
         const token = Cookies.get('authToken');
         const apiProps: ApiProps = {
-            url: `http://127.0.0.1:8095/api/seller/product/${sellertId}`,
+            url: `http://127.0.0.1:8095/api/seller/commande/restaurant/${sellertId}`,
             method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        return api(apiProps);
+    }
+
+    static async updateOrder(orderId: any): Promise<ApiReturn> {
+        const token = Cookies.get('authToken');
+        const apiProps: ApiProps = {
+            url: `http://127.0.0.1:8095/api/seller/commande/update/${orderId}`,
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,

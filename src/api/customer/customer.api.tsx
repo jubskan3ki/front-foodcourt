@@ -3,7 +3,7 @@ import { api } from '../../utils/api.utils';
 import { ApiProps, ApiReturn } from '../../interface/utils/api.interface';
 
 class ApiCustomer {
-    static async gatAllSeller(): Promise<ApiReturn> {
+    static async getAllSeller(): Promise<ApiReturn> {
         const token = Cookies.get('authToken');
         const apiProps: ApiProps = {
             url: 'http://127.0.0.1:8095/api/customer/restaurant/all',
@@ -21,6 +21,20 @@ class ApiCustomer {
         const token = Cookies.get('authToken');
         const apiProps: ApiProps = {
             url: `http://127.0.0.1:8095/api/customer/carte/${menuId}`,
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        return api(apiProps);
+    }
+
+    static async getAllOrder(): Promise<ApiReturn> {
+        const token = Cookies.get('authToken');
+        const apiProps: ApiProps = {
+            url: 'http://127.0.0.1:8095/api/customer/commande/all',
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
